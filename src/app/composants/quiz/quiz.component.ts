@@ -1,4 +1,5 @@
 import { Component, Inject } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Question } from 'src/app/model/question';
 import { Quiz } from 'src/app/model/quiz';
@@ -17,9 +18,15 @@ export class QuizComponent {
   public correctAnswer: string | null = null;
   public shuffledAnswers: string[] = []; // Stocke les réponses mélangées pour la question actuelle
   public score: number = 0;
+  public name: string | null = null;
 
-  constructor(@Inject(ApiService) private api: ApiService) {
-    this.questions$ = this.api.getQuestions(10, 9, "multiple", "easy");
+  constructor(@Inject(ActivatedRoute) private route : ActivatedRoute, @Inject(ApiService) private api: ApiService) {
+    const amount = this.route.snapshot.paramMap.get('amount');
+    const category = this.route.snapshot.paramMap.get('category');
+    const type = this.route.snapshot.paramMap.get('type');
+    const difficulty = this.route.snapshot.paramMap.get('difficulty');
+    this.name = this.route.snapshot.queryParamMap.get('name');
+    this.questions$ = this.api.getQuestions(Number(amount), Number(category), type ?? 'multiple', difficulty ?? 'easy');
   }
 
   decodeUTF8(value: string): string {

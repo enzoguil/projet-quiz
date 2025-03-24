@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { QuizComponent } from './composants/quiz/quiz.component';
 
 const routes: Routes = [
-  {path : 'quiz', component: QuizComponent},
+  {path : 'quiz/:amount/:category/:type:/:difficulty', component: QuizComponent},
 ];
 
 @NgModule({
