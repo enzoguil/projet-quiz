@@ -3,10 +3,10 @@
     <ng-container *ngIf="currentQuestionIndex === 0 && shuffledAnswers.length === 0">
       {{ initializeShuffledAnswers(quiz) }}
     </ng-container>
-  
+
     <div *ngIf="currentQuestionIndex < quiz.results.length">
-      <h1 class="text-xl font-bold mb-4">{{ decodeUTF8(quiz.results[currentQuestionIndex].question) }}</h1>
-      
+      <h1 class="text-xl font-bold mb-4 dark:text-white">{{ decodeUTF8(quiz.results[currentQuestionIndex].question) }}</h1>
+
       <div class="flex flex-col gap-2">
         <button
           *ngFor="let answer of shuffledAnswers"
@@ -22,7 +22,7 @@
           {{ decodeUTF8(answer) }}
         </button>
       </div>
-  
+
       <div class="flex gap-4 mt-4">
         <button
           *ngIf="!isAnswerValidated"
@@ -39,9 +39,9 @@
         </button>
       </div>
     </div>
-  
+
     <div *ngIf="currentQuestionIndex >= quiz.results.length" class="text-center">
-      <h2 class="text-2xl font-bold">Bravo {{name}}, tu as fini le quiz !</h2>
-      <p class="text-lg">Votre score est de {{ score }} / {{ quiz.results.length }}</p>
+      <h2 class="text-2xl font-bold dark:text-white">Bravo {{name}}, tu as fini le quiz !</h2>
+      <p class="text-lg dark:text-white">Votre score est de {{ score }} / {{ quiz.results.length }}</p>
     </div>
   </div>
