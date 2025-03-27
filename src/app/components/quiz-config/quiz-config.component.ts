@@ -62,7 +62,7 @@ export class QuizConfigComponent implements OnInit {
       const type = this.quizForm.get('questionType')?.value;
       const difficulty = this.quizForm.get('difficulty')?.value;
 
-      this.router.navigate([`/quiz/${amount}/${category}/${type}/${difficulty}`]);
+      this.router.navigate([`/quiz/${amount}/${category}/${type}/${difficulty}`], {queryParams: {name: this.quizForm.get('name')?.value}});
     } else {
       console.log("Formulaire invalide");
     }
