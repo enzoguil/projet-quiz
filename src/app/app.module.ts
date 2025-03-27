@@ -6,18 +6,20 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { QuizComponent } from './components/quiz/quiz.component';
+import { HttpClientModule } from '@angular/common/http';
 import { QuizConfigComponent } from './components/quiz-config/quiz-config.component';
-import { QuizPageComponent } from './components/quiz-page/quiz-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    QuizConfigComponent,
-    QuizPageComponent
+    QuizComponent,
+    QuizConfigComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     ReactiveFormsModule,
     FormsModule
   ],

@@ -7,10 +7,9 @@ import { DarkModeService } from './services/dark-mode.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-/*export class AppComponent {
-  title = 'projet-quiz';
-}*/
+
 export class AppComponent implements OnInit {
+  title = 'projet-quiz';
   quizConfig: any;
 
   constructor(private quizService: QuizService, public darkModeService: DarkModeService) {}
