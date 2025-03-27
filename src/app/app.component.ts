@@ -25,7 +25,6 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.quizService.quizConfig$.subscribe(config => {
       this.quizConfig = config;
-      console.log('Quiz config received:', config);
     });
   }
 }

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {QuizService} from "../../services/quiz.service";
 import {QuizConfig} from "../../model/formulaire";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-quiz-config',
@@ -38,14 +39,16 @@ export class QuizConfigComponent implements OnInit {
     {id: 32, name: "Entertainment: Cartoon & Animations"},
   ]
 
-  constructor(private fb: FormBuilder, private quizService: QuizService) {}
+  constructor(private fb: FormBuilder, private quizService: QuizService, private router: Router) {
+  }
 
   ngOnInit() {
     this.quizForm = this.fb.group({
       name: ['', Validators.required],
       numberOfQuestions: [5, [Validators.required, Validators.min(5), Validators.max(20)]],
       category: [9, Validators.required],
-      questionType: ['multiple', Validators.required]
+      questionType: ['multiple', Validators.required],
+      difficulty: ['medium', Validators.required],
     });
   }
 
@@ -53,8 +56,15 @@ export class QuizConfigComponent implements OnInit {
     if (this.quizForm.valid) {
       const config: QuizConfig = this.quizForm.value;
       this.quizService.setQuizConfig(config);
-      console.log('Quiz config saved:', config);
+
+      const amount = this.quizForm.get('numberOfQuestions')?.value;
+      const category = this.quizForm.get('category')?.value;
+      const type = this.quizForm.get('questionType')?.value;
+      const difficulty = this.quizForm.get('difficulty')?.value;
+
+      this.router.navigate([`/quiz/${amount}/${category}/${type}/${difficulty}`]);
+    } else {
+      console.log("Formulaire invalide");
     }
   }
 }
-

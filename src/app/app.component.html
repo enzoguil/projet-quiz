@@ -4,10 +4,6 @@
       {{ isDarkMode ? 'Passer en mode clair' : 'Passer en mode sombre' }}
     </button>
   </div>
-  <div *ngIf="quizConfig">
-    <h3>Quiz Configuration:</h3>
-    <pre>{{ quizConfig | json }}</pre>
-  </div>
 
   <router-outlet></router-outlet>
 </div>
