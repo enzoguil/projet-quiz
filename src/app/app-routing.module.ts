@@ -4,7 +4,7 @@ import { QuizComponent } from './components/quiz/quiz.component';
 import { QuizConfigComponent } from './components/quiz-config/quiz-config.component';
 
 const routes: Routes = [
-  {path : 'quiz/:amount/:category/:type:/:difficulty', component: QuizComponent},
+  {path : 'quiz/:amount/:category/:type/:difficulty', component: QuizComponent},
   {path : '', component: QuizConfigComponent},
 ];
 

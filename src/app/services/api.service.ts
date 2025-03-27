@@ -26,6 +26,7 @@ export class ApiService {
     if(!(difficulty === "easy" || difficulty === "medium" || difficulty === "hard" || difficulty === undefined)) {
       url += "&difficulty=" + difficulty;
     }
+    console.log(url);
     return this.http.get<Quiz>(url);
   }
 }
