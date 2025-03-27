@@ -1,47 +1,48 @@
 <div class="flex flex-col items-center" *ngIf="questions$ | async as quiz">
-    <!-- Initialisation des réponses mélangées pour la première question -->
-    <ng-container *ngIf="currentQuestionIndex === 0 && shuffledAnswers.length === 0">
-      {{ initializeShuffledAnswers(quiz) }}
-    </ng-container>
+  <!-- Initialisation des réponses mélangées pour la première question -->
+  <ng-container *ngIf="currentQuestionIndex === 0 && shuffledAnswers.length === 0">
+    {{ initializeShuffledAnswers(quiz) }}
+  </ng-container>
 
-    <div *ngIf="currentQuestionIndex < quiz.results.length">
-      <h1 class="text-xl font-bold mb-4 dark:text-white">{{ decodeUTF8(quiz.results[currentQuestionIndex].question) }}</h1>
+  <div *ngIf="currentQuestionIndex < quiz.results.length">
+    <h1
+      class="text-xl font-bold mb-4 dark:text-white">{{ decodeUTF8(quiz.results[currentQuestionIndex].question) }}</h1>
 
-      <div class="flex flex-col gap-2">
-        <button
-          *ngFor="let answer of shuffledAnswers"
-          class="px-4 py-2 rounded border transition-colors duration-300"
-          [ngClass]="{
+    <div class="flex flex-col gap-2">
+      <button
+        *ngFor="let answer of shuffledAnswers"
+        class="px-4 py-2 rounded border transition-colors duration-300"
+        [ngClass]="{
             'bg-green-500 text-white': isAnswerValidated && answer === correctAnswer,
             'bg-red-500 text-white': isAnswerValidated && answer !== correctAnswer && answer === selectedAnswer,
             'bg-blue-200 text-black': !isAnswerValidated && answer === selectedAnswer,
             'bg-gray-200 text-black': !isAnswerValidated && answer !== selectedAnswer
           }"
-          [disabled]="isAnswerValidated"
-          (click)="selectAnswer(answer)">
-          {{ decodeUTF8(answer) }}
-        </button>
-      </div>
-
-      <div class="flex gap-4 mt-4">
-        <button
-          *ngIf="!isAnswerValidated"
-          class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed"
-          [disabled]="!selectedAnswer"
-          (click)="validateAnswer(quiz.results[currentQuestionIndex])">
-          Valider
-        </button>
-        <button
-          *ngIf="isAnswerValidated"
-          class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-          (click)="nextQuestion(quiz)">
-          Suivant
-        </button>
-      </div>
+        [disabled]="isAnswerValidated"
+        (click)="selectAnswer(answer)">
+        {{ decodeUTF8(answer) }}
+      </button>
     </div>
 
-    <div *ngIf="currentQuestionIndex >= quiz.results.length" class="text-center">
-      <h2 class="text-2xl font-bold dark:text-white">Bravo {{name}}, tu as fini le quiz !</h2>
-      <p class="text-lg dark:text-white">Votre score est de {{ score }} / {{ quiz.results.length }}</p>
+    <div class="flex gap-4 mt-4">
+      <button
+        *ngIf="!isAnswerValidated"
+        class="px-4 py-2 bg-blue-500 text-white dark:text-black rounded hover:bg-blue-600 dark:bg-blue-700 dark:hover:bg-blue-600 disabled:bg-gray-300 dark:disabled:bg-gray-300 disabled:cursor-not-allowed"
+        [disabled]="!selectedAnswer"
+        (click)="validateAnswer(quiz.results[currentQuestionIndex])">
+        Valider
+      </button>
+      <button
+        *ngIf="isAnswerValidated"
+        class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 dark:bg-blue-700 dark:hover:bg-blue-600 "
+        (click)="nextQuestion(quiz)">
+        Suivant
+      </button>
     </div>
   </div>
+
+  <div *ngIf="currentQuestionIndex >= quiz.results.length" class="text-center dark:text-white">
+    <h2 class="text-2xl font-bold">Bravo {{ name }}, tu as fini le quiz !</h2>
+    <p class="text-lg">Votre score est de {{ score }} / {{ quiz.results.length }}</p>
+  </div>
+</div>
