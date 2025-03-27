@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
   }
 
   goToHomePage(): void {
-    this.router.navigate(['/']); // Redirige vers la route '/'
+    this.router.navigate(['/']);
   }
 
   get isDarkMode() {
