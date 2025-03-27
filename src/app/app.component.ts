@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { QuizService } from './services/quiz.service';
-import { DarkModeService } from './services/dark-mode.service';
+import {Component, OnInit} from '@angular/core';
+import {QuizService} from './services/quiz.service';
+import {DarkModeService} from './services/dark-mode.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -12,10 +13,15 @@ export class AppComponent implements OnInit {
   title = 'projet-quiz';
   quizConfig: any;
 
-  constructor(private quizService: QuizService, public darkModeService: DarkModeService) {}
+  constructor(private quizService: QuizService, public darkModeService: DarkModeService, private router: Router) {
+  }
 
   toggleDarkMode() {
     this.darkModeService.toggleDarkMode();
+  }
+
+  goToHomePage(): void {
+    this.router.navigate(['/']); // Redirige vers la route '/'
   }
 
   get isDarkMode() {
