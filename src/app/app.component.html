@@ -1,2 +1,15 @@
-<button routerLink="/quiz">Quiz</button>
-<router-outlet></router-outlet>
+<div class="min-h-screen bg-white dark:bg-black">
+  <div class="p-4">
+    <button (click)="toggleDarkMode()" class="p-2 bg-blue-500 dark:bg-blue-800 text-white rounded">
+      {{ isDarkMode ? 'Passer en mode clair' : 'Passer en mode sombre' }}
+    </button>
+  </div>
+  <app-quiz-config></app-quiz-config>
+
+  <div *ngIf="quizConfig">
+    <h3>Quiz Configuration:</h3>
+    <pre>{{ quizConfig | json }}</pre>
+  </div>
+
+  <router-outlet></router-outlet>
+</div>
