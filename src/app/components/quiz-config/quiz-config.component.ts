@@ -4,6 +4,9 @@ import {QuizService} from "../../services/quiz.service";
 import {QuizConfig} from "../../model/formulaire";
 import {Router} from "@angular/router";
 
+/**
+ * Component for configuring and starting a quiz.
+ */
 @Component({
   selector: 'app-quiz-config',
   templateUrl: './quiz-config.component.html',
@@ -11,7 +14,10 @@ import {Router} from "@angular/router";
 })
 export class QuizConfigComponent implements OnInit {
 
+  /** Form group for quiz configuration */
   quizForm!: FormGroup;
+
+  /** List of quiz categories */
   categories = [
     {id: 9, name: "General Knowledge"},
     {id: 10, name: "Entertainment: Books"},
@@ -39,9 +45,18 @@ export class QuizConfigComponent implements OnInit {
     {id: 32, name: "Entertainment: Cartoon & Animations"},
   ]
 
+  /**
+   * Constructor for QuizConfigComponent.
+   * @param fb FormBuilder instance for creating form groups
+   * @param quizService Service for managing quiz configurations
+   * @param router Router instance for navigation
+   */
   constructor(private fb: FormBuilder, private quizService: QuizService, private router: Router) {
   }
 
+  /**
+   * Initializes the component and sets up the quiz form.
+   */
   ngOnInit() {
     this.quizForm = this.fb.group({
       name: ['', Validators.required],
@@ -52,6 +67,10 @@ export class QuizConfigComponent implements OnInit {
     });
   }
 
+  /**
+   * Starts the quiz with the configured settings.
+   * If the form is valid, the quiz configuration is set and the user is navigated to the quiz page.
+   */
   startQuiz() {
     if (this.quizForm.valid) {
       const config: QuizConfig = this.quizForm.value;
